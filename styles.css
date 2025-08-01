@@ -517,21 +517,21 @@ body {
 }
 
  .ros-image {
-     height: 200px;
-     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     height: 300px;
+     background: white;
      display: flex;
      align-items: center;
      justify-content: center;
-     font-size: 3rem;
-     color: white;
      overflow: hidden;
+     border-radius: 12px 12px 0 0;
  }
 
  .ros-project-image {
      width: 100%;
      height: 100%;
-     object-fit: cover;
+     object-fit: contain;
      border-radius: 0;
+     padding: 1rem;
  }
 
 .ros-content {
