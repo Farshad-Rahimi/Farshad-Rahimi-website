@@ -439,11 +439,56 @@ body {
     background: #000;
 }
 
-.video-caption {
-    text-align: center;
-    color: #6b7280;
-    font-style: italic;
-}
+ .video-caption {
+     text-align: center;
+     color: #6b7280;
+     font-style: italic;
+ }
+
+ /* Download Section */
+ .download-section {
+     margin-top: 3rem;
+     text-align: center;
+ }
+
+ .download-section h3 {
+     font-size: 1.5rem;
+     margin-bottom: 1rem;
+     color: #1f2937;
+ }
+
+ .download-box {
+     background: #10b981;
+     padding: 1.5rem;
+     border-radius: 12px;
+     box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2);
+     display: inline-block;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }
+
+ .download-box:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 6px 25px rgba(16, 185, 129, 0.3);
+ }
+
+ .download-link {
+     color: white;
+     text-decoration: none;
+     font-weight: 600;
+     font-size: 1.1rem;
+     display: flex;
+     align-items: center;
+     gap: 0.5rem;
+     transition: color 0.3s ease;
+ }
+
+ .download-link:hover {
+     color: #f0fdf4;
+ }
+
+ .download-link i {
+     font-size: 1.2rem;
+ }
 
 
 
