@@ -245,6 +245,50 @@ body {
     color: #4b5563;
 }
 
+.contact-info {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #2563eb;
+}
+
+.contact-info h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.contact-link:hover {
+    background: #e3f2fd;
+    color: #1976d2;
+    transform: translateX(5px);
+}
+
+.contact-link i {
+    font-size: 1.1rem;
+    width: 20px;
+}
+
 .skills h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
