@@ -7,6 +7,61 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .cv-download-container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .cv-download-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .cv-download-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .download-button {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .download-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .download-counter {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .counter-number {
+            font-weight: 600;
+            color: #4CAF50;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -40,106 +95,15 @@
         </div>
     </nav>
 
-    <!-- CV Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1 class="page-title">Curriculum Vitae</h1>
-            <p class="page-subtitle">Academic and professional background in robotics and automation</p>
-        </div>
-    </section>
-
-    <!-- CV Section -->
-    <section class="cv">
-        <div class="container">
-            <div class="cv-content">
-                <div class="cv-download">
-                    <h3>Download My CV</h3>
-                    <p>Access my complete academic and professional background, including research experience, publications, and technical skills.</p>
-                    <div class="cv-buttons">
-                        <a href="#" class="btn btn-primary"><i class="fas fa-download"></i> Download PDF</a>
-                        <a href="#" class="btn btn-secondary"><i class="fas fa-eye"></i> View Online</a>
-                    </div>
-                </div>
-                <div class="cv-highlights">
-                    <h3>Key Highlights</h3>
-                    <ul class="cv-list">
-                        <li>PhD in Robotics and Automation</li>
-                        <li>5+ years of research experience</li>
-                        <li>10+ peer-reviewed publications</li>
-                        <li>Expert in ROS, Julia, and MATLAB</li>
-                        <li>Specialized in simulation and control</li>
-                        <li>Experience in machine learning applications</li>
-                        <li>Proficient in Python, C++, and Java</li>
-                        <li>Published in top-tier robotics journals</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="cv-details">
-                <div class="cv-section">
-                    <h3>Education</h3>
-                    <div class="cv-item">
-                        <h4>PhD in Robotics and Automation</h4>
-                        <p class="cv-institution">University Name, 2020-2024</p>
-                        <p class="cv-description">Research focused on advanced robotics control systems and autonomous navigation algorithms.</p>
-                    </div>
-                    <div class="cv-item">
-                        <h4>Master of Science in Mechanical Engineering</h4>
-                        <p class="cv-institution">University Name, 2018-2020</p>
-                        <p class="cv-description">Specialized in control systems and robotics applications.</p>
-                    </div>
-                </div>
-
-                <div class="cv-section">
-                    <h3>Research Experience</h3>
-                    <div class="cv-item">
-                        <h4>Research Assistant</h4>
-                        <p class="cv-institution">Robotics Lab, 2020-2024</p>
-                        <p class="cv-description">Developed ROS-based simulation environments and implemented advanced control algorithms.</p>
-                    </div>
-                    <div class="cv-item">
-                        <h4>Graduate Researcher</h4>
-                        <p class="cv-institution">Automation Lab, 2018-2020</p>
-                        <p class="cv-description">Conducted research on machine learning applications in robotics and automation.</p>
-                    </div>
-                </div>
-
-                <div class="cv-section">
-                    <h3>Technical Skills</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h4>Programming Languages</h4>
-                            <ul>
-                                <li>Python</li>
-                                <li>C++</li>
-                                <li>Julia</li>
-                                <li>MATLAB</li>
-                                <li>Java</li>
-                            </ul>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Robotics & Automation</h4>
-                            <ul>
-                                <li>ROS (Robot Operating System)</li>
-                                <li>SLAM Algorithms</li>
-                                <li>Path Planning</li>
-                                <li>Computer Vision</li>
-                                <li>Control Systems</li>
-                            </ul>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Tools & Platforms</h4>
-                            <ul>
-                                <li>Gazebo Simulator</li>
-                                <li>OpenCV</li>
-                                <li>TensorFlow</li>
-                                <li>Git</li>
-                                <li>Linux</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- CV Download Section -->
+    <section class="cv-download-container">
+        <h1 class="cv-download-title">Download My CV</h1>
+        <p class="cv-download-description">Access my complete academic and professional background, including research experience, publications, and technical skills.</p>
+        <a href="codes/CV_Farshad_Rahimi.pdf" class="download-button" id="downloadBtn" download>
+            <i class="fas fa-download"></i> Download Farshad CV
+        </a>
+        <div class="download-counter">
+            Downloaded <span class="counter-number" id="downloadCount">0</span> times
         </div>
     </section>
 
@@ -151,5 +115,27 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Download counter functionality
+        let downloadCount = localStorage.getItem('cvDownloadCount') || 0;
+        
+        // Display current count
+        document.getElementById('downloadCount').textContent = downloadCount;
+        
+        // Handle download click
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Increment counter
+            downloadCount++;
+            localStorage.setItem('cvDownloadCount', downloadCount);
+            
+            // Update display
+            document.getElementById('downloadCount').textContent = downloadCount;
+            
+            // Optional: Add a small delay to show the increment
+            setTimeout(() => {
+                // The download will start automatically due to the download attribute
+            }, 100);
+        });
+    </script>
 </body>
 </html> 
