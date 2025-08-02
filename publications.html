@@ -7,6 +7,115 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .publication-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .publication-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .publication-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .publication-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+            line-height: 1.4;
+        }
+
+        .publication-authors {
+            color: #6b7280;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-name {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .publication-journal {
+            color: #2563eb;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .publication-doi {
+            color: #059669;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .publication-doi a {
+            color: #059669;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .publication-doi a:hover {
+            color: #047857;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .publication-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .publication-link:hover {
+            color: #1d4ed8;
+        }
+
+        .empty-section {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -51,48 +160,58 @@
     <!-- Publications Section -->
     <section class="publications">
         <div class="container">
-            <div class="publications-content">
-                <div class="publication-item">
-                    <h3>Research Paper Title 1</h3>
-                    <p class="publication-authors">Farshad Rahimi, Co-author Name</p>
-                    <p class="publication-journal">Journal of Robotics and Automation, 2024</p>
-                    <p class="publication-abstract">Abstract of your research paper describing the methodology, results, and contributions to the field of robotics and automation.</p>
-                    <div class="publication-links">
-                        <a href="#" class="publication-link"><i class="fas fa-external-link-alt"></i> View Paper</a>
-                        <a href="#" class="publication-link"><i class="fas fa-download"></i> Download PDF</a>
+            <!-- Under Reviewing Papers -->
+            <div class="publication-section">
+                <div class="section-header">
+                    <h2 class="section-title">Under Reviewing Papers</h2>
+                    <p class="section-subtitle">Papers currently under review in various journals and conferences</p>
+                </div>
+                <div class="publications-content">
+                    <div class="empty-section">
+                        <i class="fas fa-clock" style="font-size: 3rem; margin-bottom: 1rem; color: #d1d5db;"></i>
+                        <p>No papers currently under review</p>
                     </div>
                 </div>
-                
-                <div class="publication-item">
-                    <h3>Research Paper Title 2</h3>
-                    <p class="publication-authors">Farshad Rahimi, Co-author Name</p>
-                    <p class="publication-journal">International Conference on Simulation, 2023</p>
-                    <p class="publication-abstract">Abstract of your second research paper focusing on simulation methods and their applications in robotics.</p>
-                    <div class="publication-links">
-                        <a href="#" class="publication-link"><i class="fas fa-external-link-alt"></i> View Paper</a>
-                        <a href="#" class="publication-link"><i class="fas fa-download"></i> Download PDF</a>
-                    </div>
-                </div>
+            </div>
 
-                <div class="publication-item">
-                    <h3>Research Paper Title 3</h3>
-                    <p class="publication-authors">Farshad Rahimi, Co-author Name</p>
-                    <p class="publication-journal">IEEE Transactions on Robotics, 2023</p>
-                    <p class="publication-abstract">Advanced robotics control algorithms and their implementation in real-world applications.</p>
-                    <div class="publication-links">
-                        <a href="#" class="publication-link"><i class="fas fa-external-link-alt"></i> View Paper</a>
-                        <a href="#" class="publication-link"><i class="fas fa-download"></i> Download PDF</a>
+            <!-- Journal Papers -->
+            <div class="publication-section">
+                <div class="section-header">
+                    <h2 class="section-title">Journal Papers</h2>
+                    <p class="section-subtitle">Published papers in peer-reviewed journals</p>
+                </div>
+                <div class="publications-content">
+                    <div class="publication-item">
+                        <h3>Fault-tolerant control for nonlinear time-delay systems using neural network observers</h3>
+                        <p class="publication-authors">
+                            <span class="author-name">Farshad Rahimi</span>
+                        </p>
+                        <p class="publication-journal">International Journal of Dynamics and Control, 2025</p>
+                        <div class="publication-doi">
+                            <i class="fas fa-link"></i>
+                            <a href="https://doi.org/10.1007/s40435-024-01536-y" target="_blank">
+                                DOI: https://doi.org/10.1007/s40435-024-01536-y
+                            </a>
+                        </div>
+                        <div class="publication-links">
+                            <a href="https://doi.org/10.1007/s40435-024-01536-y" target="_blank" class="publication-link">
+                                <i class="fas fa-external-link-alt"></i> View Paper
+                            </a>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="publication-item">
-                    <h3>Research Paper Title 4</h3>
-                    <p class="publication-authors">Farshad Rahimi, Co-author Name</p>
-                    <p class="publication-journal">Robotics and Autonomous Systems, 2022</p>
-                    <p class="publication-abstract">Machine learning approaches for autonomous navigation and decision-making in robotic systems.</p>
-                    <div class="publication-links">
-                        <a href="#" class="publication-link"><i class="fas fa-external-link-alt"></i> View Paper</a>
-                        <a href="#" class="publication-link"><i class="fas fa-download"></i> Download PDF</a>
+            <!-- Conference Papers -->
+            <div class="publication-section">
+                <div class="section-header">
+                    <h2 class="section-title">Conference Papers</h2>
+                    <p class="section-subtitle">Papers presented at international conferences and symposiums</p>
+                </div>
+                <div class="publications-content">
+                    <div class="empty-section">
+                        <i class="fas fa-microphone" style="font-size: 3rem; margin-bottom: 1rem; color: #d1d5db;"></i>
+                        <p>No conference papers available at the moment</p>
                     </div>
                 </div>
             </div>
