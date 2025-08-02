@@ -7,6 +7,145 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .codes-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .page-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-intro h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .page-intro p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .paper-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .paper-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+        }
+
+        .paper-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .paper-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .paper-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .paper-detail i {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .paper-content {
+            padding: 30px;
+        }
+
+        .download-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .download-info {
+            flex: 1;
+        }
+
+        .download-button {
+            background: #007bff;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .download-button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .download-counter {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .counter-number {
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .paper-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .download-section {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .paper-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -40,90 +179,165 @@
         </div>
     </nav>
 
-    <!-- Codes Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1 class="page-title">My Codes Julia & Matlab</h1>
-            <p class="page-subtitle">Advanced computational algorithms and numerical methods implementation</p>
-        </div>
-    </section>
-
     <!-- Codes Section -->
-    <section class="codes">
-        <div class="container">
-            <div class="codes-grid">
-                <div class="code-card">
-                    <div class="code-image">
-                        <i class="fas fa-calculator"></i>
+    <section class="codes-container">
+        <div class="page-intro">
+            <h1>Matlab & Julia Programming</h1>
+            <p>In this section, I would like to share my experience and sample codes from my papers, which have been simulated using Julia, Matlab, with you.</p>
+        </div>
+
+        <!-- Paper 1 -->
+        <div class="paper-card">
+            <div class="paper-header">
+                <h2 class="paper-title">Dynamic Event-Triggered Fault-Tolerant Control for Nonlinear Systems via Critic Learning</h2>
+                <div class="paper-details">
+                    <div class="paper-detail">
+                        <i class="fas fa-user"></i>
+                        <span>Author: Farshad Rahimi</span>
                     </div>
-                    <div class="code-content">
-                        <h3>Numerical Optimization</h3>
-                        <p>Julia implementation of advanced numerical optimization algorithms for robotics applications.</p>
-                        <div class="code-tech">
-                            <span class="tech-tag">Julia</span>
-                            <span class="tech-tag">Optimization</span>
-                            <span class="tech-tag">Numerical Methods</span>
-                        </div>
-                        <div class="code-links">
-                            <a href="#" class="code-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="code-link"><i class="fas fa-book"></i> Documentation</a>
+                    <div class="paper-detail">
+                        <i class="fas fa-calendar"></i>
+                        <span>Publication Date: 2025/10/15</span>
+                    </div>
+                    <div class="paper-detail">
+                        <i class="fas fa-book"></i>
+                        <span>Journal: Journal of Control and Decision</span>
+                    </div>
+                    <div class="paper-detail">
+                        <i class="fas fa-link"></i>
+                        <span>DOI: 10.1080/23307706.2025.2532018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="paper-content">
+                <p class="paper-description">Advanced fault-tolerant control algorithms implemented using critic learning approaches for nonlinear systems.</p>
+                <div class="download-section">
+                    <div class="download-info">
+                        <a href="codes/Codes_of_Paper.rar" class="download-button" id="downloadBtn1" download>
+                            <i class="fas fa-download"></i> Download Codes
+                        </a>
+                        <div class="download-counter">
+                            Downloaded <span class="counter-number" id="downloadCount1">0</span> times
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="code-card">
-                    <div class="code-image">
-                        <i class="fas fa-chart-line"></i>
+        <!-- Paper 2 -->
+        <div class="paper-card">
+            <div class="paper-header">
+                <h2 class="paper-title">Adaptive Dynamic Programming-based Fault Tolerant Control for Nonlinear Time-delay Systems</h2>
+                <div class="paper-details">
+                    <div class="paper-detail">
+                        <i class="fas fa-user"></i>
+                        <span>Author: Farshad Rahimi</span>
                     </div>
-                    <div class="code-content">
-                        <h3>Signal Processing</h3>
-                        <p>MATLAB implementation of signal processing algorithms for sensor data analysis in robotics.</p>
-                        <div class="code-tech">
-                            <span class="tech-tag">MATLAB</span>
-                            <span class="tech-tag">Signal Processing</span>
-                            <span class="tech-tag">Sensor Data</span>
-                        </div>
-                        <div class="code-links">
-                            <a href="#" class="code-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="code-link"><i class="fas fa-book"></i> Documentation</a>
+                    <div class="paper-detail">
+                        <i class="fas fa-code"></i>
+                        <span>Implementation: Julia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="paper-content">
+                <p class="paper-description">Julia-based implementation of adaptive dynamic programming algorithms for fault-tolerant control in time-delay systems.</p>
+                <div class="download-section">
+                    <div class="download-info">
+                        <a href="codes/Simulation_Julia_ADP1.rar" class="download-button" id="downloadBtn2" download>
+                            <i class="fas fa-download"></i> Download Julia Codes
+                        </a>
+                        <div class="download-counter">
+                            Downloaded <span class="counter-number" id="downloadCount2">0</span> times
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="code-card">
-                    <div class="code-image">
-                        <i class="fas fa-brain"></i>
+        <!-- Paper 3 -->
+        <div class="paper-card">
+            <div class="paper-header">
+                <h2 class="paper-title">An Online Fault-tolerant Control Approach Based on Policy Iteration Algorithm for Nonlinear Time-delay Systems</h2>
+                <div class="paper-details">
+                    <div class="paper-detail">
+                        <i class="fas fa-user"></i>
+                        <span>Author: Farshad Rahimi</span>
                     </div>
-                    <div class="code-content">
-                        <h3>Machine Learning</h3>
-                        <p>Julia-based machine learning algorithms for pattern recognition and predictive modeling.</p>
-                        <div class="code-tech">
-                            <span class="tech-tag">Julia</span>
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">Pattern Recognition</span>
-                        </div>
-                        <div class="code-links">
-                            <a href="#" class="code-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="code-link"><i class="fas fa-book"></i> Documentation</a>
+                    <div class="paper-detail">
+                        <i class="fas fa-code"></i>
+                        <span>Implementation: Julia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="paper-content">
+                <p class="paper-description">Online fault-tolerant control implementation using policy iteration algorithms for nonlinear time-delay systems.</p>
+                <div class="download-section">
+                    <div class="download-info">
+                        <a href="codes/Simulation_Julia_ADP.rar" class="download-button" id="downloadBtn3" download>
+                            <i class="fas fa-download"></i> Download Julia Codes
+                        </a>
+                        <div class="download-counter">
+                            Downloaded <span class="counter-number" id="downloadCount3">0</span> times
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="code-card">
-                    <div class="code-image">
-                        <i class="fas fa-cube"></i>
+        <!-- Paper 4 -->
+        <div class="paper-card">
+            <div class="paper-header">
+                <h2 class="paper-title">Fault-tolerant Control for Nonlinear Time-delay Systems Using Neural Network Observers</h2>
+                <div class="paper-details">
+                    <div class="paper-detail">
+                        <i class="fas fa-user"></i>
+                        <span>Author: Farshad Rahimi</span>
                     </div>
-                    <div class="code-content">
-                        <h3>3D Visualization</h3>
-                        <p>MATLAB scripts for 3D visualization and plotting of robotic systems and trajectories.</p>
-                        <div class="code-tech">
-                            <span class="tech-tag">MATLAB</span>
-                            <span class="tech-tag">3D Visualization</span>
-                            <span class="tech-tag">Plotting</span>
+                    <div class="paper-detail">
+                        <i class="fas fa-code"></i>
+                        <span>Implementation: Julia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="paper-content">
+                <p class="paper-description">Neural network-based observer implementation for fault-tolerant control in nonlinear time-delay systems.</p>
+                <div class="download-section">
+                    <div class="download-info">
+                        <a href="codes/Julia_codes_Neural_observer.rar" class="download-button" id="downloadBtn4" download>
+                            <i class="fas fa-download"></i> Download Julia Codes
+                        </a>
+                        <div class="download-counter">
+                            Downloaded <span class="counter-number" id="downloadCount4">0</span> times
                         </div>
-                        <div class="code-links">
-                            <a href="#" class="code-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="code-link"><i class="fas fa-book"></i> Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paper 5 -->
+        <div class="paper-card">
+            <div class="paper-header">
+                <h2 class="paper-title">Online Critic Learning for Delay-Aware Chemotherapy Drug Dosing Optimization</h2>
+                <div class="paper-details">
+                    <div class="paper-detail">
+                        <i class="fas fa-user"></i>
+                        <span>Author: Farshad Rahimi</span>
+                    </div>
+                    <div class="paper-detail">
+                        <i class="fas fa-code"></i>
+                        <span>Implementation: Julia/Matlab</span>
+                    </div>
+                </div>
+            </div>
+            <div class="paper-content">
+                <p class="paper-description">Here, you can download the code of this my paper for chemotherapy drug dosing optimization using online critic learning.</p>
+                <div class="download-section">
+                    <div class="download-info">
+                        <a href="codes/Final_version_codes.rar" class="download-button" id="downloadBtn5" download>
+                            <i class="fas fa-download"></i> Download Drug Dosing Codes
+                        </a>
+                        <div class="download-counter">
+                            Downloaded <span class="counter-number" id="downloadCount5">0</span> times
                         </div>
                     </div>
                 </div>
@@ -139,5 +353,28 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Download counter functionality for all papers
+        const downloadButtons = [
+            { id: 'downloadBtn1', counterId: 'downloadCount1', storageKey: 'paper1DownloadCount' },
+            { id: 'downloadBtn2', counterId: 'downloadCount2', storageKey: 'paper2DownloadCount' },
+            { id: 'downloadBtn3', counterId: 'downloadCount3', storageKey: 'paper3DownloadCount' },
+            { id: 'downloadBtn4', counterId: 'downloadCount4', storageKey: 'paper4DownloadCount' },
+            { id: 'downloadBtn5', counterId: 'downloadCount5', storageKey: 'paper5DownloadCount' }
+        ];
+
+        // Initialize counters
+        downloadButtons.forEach(button => {
+            let downloadCount = localStorage.getItem(button.storageKey) || 0;
+            document.getElementById(button.counterId).textContent = downloadCount;
+            
+            // Add click event listener
+            document.getElementById(button.id).addEventListener('click', function() {
+                downloadCount++;
+                localStorage.setItem(button.storageKey, downloadCount);
+                document.getElementById(button.counterId).textContent = downloadCount;
+            });
+        });
+    </script>
 </body>
 </html> 
