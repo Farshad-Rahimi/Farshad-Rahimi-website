@@ -115,6 +115,37 @@
             color: #6b7280;
             font-style: italic;
         }
+
+        .scholar-link-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .scholar-link-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: #10b981;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .scholar-link-box:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            color: white;
+        }
+
+        .scholar-link-box i {
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -154,6 +185,14 @@
         <div class="container">
             <h1 class="page-title">My Publications</h1>
             <p class="page-subtitle">Research papers and academic publications in robotics, automation, and computational methods</p>
+            
+            <!-- Google Scholar Link Box -->
+            <div class="scholar-link-container">
+                <a href="https://scholar.google.com/citations?hl=en&user=KOzMTRsAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" class="scholar-link-box">
+                    <i class="fas fa-graduation-cap"></i>
+                    Go To My Google Scholar
+                </a>
+            </div>
         </div>
     </section>
 
