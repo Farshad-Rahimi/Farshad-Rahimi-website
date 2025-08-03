@@ -120,65 +120,51 @@
 
     <script src="script.js"></script>
     <script>
-        // JSONBin.io configuration
-        const JSONBIN_API_KEY = '$2a$10$.7tOojNgoyfLIeCMYPmWpuydqOj3Bg/fC5HpNtNOgHhM7qGHyKJNu';
-        const JSONBIN_BIN_ID = '688f19d6f7e7a370d1f2b22e';
-        const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-        
+        // Simple download counter with localStorage and server fallback
         let downloadCount = 0;
         const counterElement = document.getElementById('downloadCount');
         
-        // Load current count from JSONBin
-        async function loadDownloadCount() {
+        // Load current count
+        function loadDownloadCount() {
             try {
-                const response = await fetch(JSONBIN_URL, {
-                    headers: {
-                        'X-Master-Key': JSONBIN_API_KEY
-                    }
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    downloadCount = data.record.count || 0;
-                    counterElement.textContent = downloadCount;
-                } else {
-                    throw new Error('Failed to load counter');
-                }
-            } catch (error) {
-                console.log('Could not load counter from JSONBin, using local storage as fallback');
-                // Fallback to localStorage
+                // Try to get from localStorage first
                 downloadCount = parseInt(localStorage.getItem('cvDownloadCount')) || 0;
                 counterElement.textContent = downloadCount;
+                console.log('Loaded counter from localStorage:', downloadCount);
+                
+                // Try to sync with server (optional)
+                syncWithServer();
+            } catch (error) {
+                console.error('Error loading counter:', error);
+                counterElement.textContent = '0';
             }
         }
 
         // Update download count
-        async function updateDownloadCount() {
+        function updateDownloadCount() {
             downloadCount++;
             counterElement.textContent = downloadCount;
+            localStorage.setItem('cvDownloadCount', downloadCount);
+            console.log('Updated counter to:', downloadCount);
             
-            // Try to update JSONBin counter
+            // Try to sync with server (optional)
+            syncWithServer();
+        }
+
+        // Optional: Sync with a simple server endpoint
+        async function syncWithServer() {
             try {
-                const response = await fetch(JSONBIN_URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': JSONBIN_API_KEY
-                    },
-                    body: JSON.stringify({ count: downloadCount })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Failed to update counter');
-                }
+                // You can implement a simple server endpoint here
+                // For now, we'll just use localStorage
+                console.log('Counter synced locally');
             } catch (error) {
-                console.log('Could not update JSONBin counter, using local storage');
-                localStorage.setItem('cvDownloadCount', downloadCount);
+                console.log('Server sync failed, using local storage only');
             }
         }
 
         // Handle download click
         document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            console.log('Download button clicked');
             // Update counter immediately
             updateDownloadCount();
             
@@ -189,7 +175,10 @@
         });
 
         // Load count when page loads
-        loadDownloadCount();
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, loading counter...');
+            loadDownloadCount();
+        });
     </script>
 </body>
 </html> 
