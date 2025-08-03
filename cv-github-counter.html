@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Farshad Rahimi (GitHub Counter)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .cv-download-container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .cv-download-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .cv-download-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .download-button {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .download-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .download-counter {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .counter-number {
+            font-weight: 600;
+            color: #4CAF50;
+        }
+
+        .loading {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Farshad Rahimi</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="publications.html" class="nav-link">My Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a href="ros-simulations.html" class="nav-link">My ROS Simulations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="codes.html" class="nav-link">My Codes Julia & Matlab</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cv.html" class="nav-link active">CV</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CV Download Section -->
+    <section class="cv-download-container">
+        <h1 class="cv-download-title">Download My CV</h1>
+        <p class="cv-download-description">Access my complete academic and professional background, including research experience, publications, and technical skills.</p>
+        <a href="codes/CV_Farshad_Rahimi.pdf" class="download-button" id="downloadBtn" download>
+            <i class="fas fa-download"></i> Download Farshad CV
+        </a>
+        <div class="download-counter">
+            Downloaded <span class="counter-number" id="downloadCount">Loading...</span> times
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Farshad Rahimi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // GitHub-based counter (requires GitHub token setup)
+        // This is an alternative solution if you want global counter
+        let downloadCount = 0;
+        const counterElement = document.getElementById('downloadCount');
+        
+        // For now, using localStorage as the primary solution
+        function loadDownloadCount() {
+            try {
+                downloadCount = parseInt(localStorage.getItem('cvDownloadCount')) || 0;
+                counterElement.textContent = downloadCount;
+                console.log('Loaded counter:', downloadCount);
+            } catch (error) {
+                console.error('Error loading counter:', error);
+                counterElement.textContent = '0';
+            }
+        }
+
+        function updateDownloadCount() {
+            downloadCount++;
+            counterElement.textContent = downloadCount;
+            localStorage.setItem('cvDownloadCount', downloadCount);
+            console.log('Updated counter to:', downloadCount);
+        }
+
+        // Handle download click
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            console.log('Download button clicked');
+            updateDownloadCount();
+            
+            setTimeout(() => {
+                // Download starts automatically
+            }, 100);
+        });
+
+        // Load count when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, loading counter...');
+            loadDownloadCount();
+        });
+    </script>
+</body>
+</html> 
