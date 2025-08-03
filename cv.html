@@ -61,6 +61,10 @@
             font-weight: 600;
             color: #4CAF50;
         }
+
+        .loading {
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
@@ -103,7 +107,7 @@
             <i class="fas fa-download"></i> Download Farshad CV
         </a>
         <div class="download-counter">
-            Downloaded <span class="counter-number" id="downloadCount">0</span> times
+            Downloaded <span class="counter-number" id="downloadCount">Loading...</span> times
         </div>
     </section>
 
@@ -116,26 +120,78 @@
 
     <script src="script.js"></script>
     <script>
-        // Download counter functionality
-        let downloadCount = localStorage.getItem('cvDownloadCount') || 0;
+        // JSONBin.io configuration
+        // You need to create a free account at https://jsonbin.io/
+        // and replace these values with your own
+        const JSONBIN_API_KEY = '$2a$10$YOUR_API_KEY_HERE'; // Replace with your API key
+        const JSONBIN_BIN_ID = 'YOUR_BIN_ID_HERE'; // Replace with your bin ID
+        const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
         
-        // Display current count
-        document.getElementById('downloadCount').textContent = downloadCount;
+        let downloadCount = 0;
+        const counterElement = document.getElementById('downloadCount');
         
-        // Handle download click
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            // Increment counter
+        // Load current count from JSONBin
+        async function loadDownloadCount() {
+            try {
+                const response = await fetch(JSONBIN_URL, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_API_KEY
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    downloadCount = data.record.count || 0;
+                    counterElement.textContent = downloadCount;
+                } else {
+                    throw new Error('Failed to load counter');
+                }
+            } catch (error) {
+                console.log('Could not load counter from JSONBin, using local storage as fallback');
+                // Fallback to localStorage
+                downloadCount = parseInt(localStorage.getItem('cvDownloadCount')) || 0;
+                counterElement.textContent = downloadCount;
+            }
+        }
+
+        // Update download count
+        async function updateDownloadCount() {
             downloadCount++;
-            localStorage.setItem('cvDownloadCount', downloadCount);
+            counterElement.textContent = downloadCount;
             
-            // Update display
-            document.getElementById('downloadCount').textContent = downloadCount;
+            // Try to update JSONBin counter
+            try {
+                const response = await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify({ count: downloadCount })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to update counter');
+                }
+            } catch (error) {
+                console.log('Could not update JSONBin counter, using local storage');
+                localStorage.setItem('cvDownloadCount', downloadCount);
+            }
+        }
+
+        // Handle download click
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            // Update counter immediately
+            updateDownloadCount();
             
-            // Optional: Add a small delay to show the increment
+            // Add a small delay to show the increment
             setTimeout(() => {
                 // The download will start automatically due to the download attribute
             }, 100);
         });
+
+        // Load count when page loads
+        loadDownloadCount();
     </script>
 </body>
 </html> 
