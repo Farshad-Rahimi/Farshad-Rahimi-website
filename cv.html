@@ -138,63 +138,90 @@
 
     <script src="script.js"></script>
     <script>
-        // Simple download counter with localStorage and server fallback
-        let downloadCount = 0;
+        // Shared counter via CountAPI + local fallback
         const counterElement = document.getElementById('downloadCount');
-        
-        // Load current count
-        function loadDownloadCount() {
+        const COUNTER_NAMESPACE = 'farshadrahimi-site';
+        const COUNTER_KEY = 'cv_downloads_v1';
+        const COUNTER_API = 'https://api.countapi.xyz';
+        const LOCAL_KEY = 'cvDownloadCount';
+
+        function setCounterText(value) {
+            counterElement.textContent = String(value);
+        }
+
+        async function getRemoteCount() {
             try {
-                // Try to get from localStorage first
-                downloadCount = parseInt(localStorage.getItem('cvDownloadCount')) || 0;
-                counterElement.textContent = downloadCount;
-                console.log('Loaded counter from localStorage:', downloadCount);
-                
-                // Try to sync with server (optional)
-                syncWithServer();
-            } catch (error) {
-                console.error('Error loading counter:', error);
-                counterElement.textContent = '0';
+                const res = await fetch(`${COUNTER_API}/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    return typeof data.value === 'number' ? data.value : null;
+                }
+                if (res.status === 404) {
+                    // create the counter if it doesn't exist
+                    await fetch(`${COUNTER_API}/create?namespace=${encodeURIComponent(COUNTER_NAMESPACE)}&key=${encodeURIComponent(COUNTER_KEY)}&value=0`);
+                    return 0;
+                }
+            } catch (e) {
+                console.warn('Remote counter fetch failed:', e);
             }
+            return null;
         }
 
-        // Update download count
-        function updateDownloadCount() {
-            downloadCount++;
-            counterElement.textContent = downloadCount;
-            localStorage.setItem('cvDownloadCount', downloadCount);
-            console.log('Updated counter to:', downloadCount);
-            
-            // Try to sync with server (optional)
-            syncWithServer();
-        }
-
-        // Optional: Sync with a simple server endpoint
-        async function syncWithServer() {
+        async function incrementRemoteCount() {
             try {
-                // You can implement a simple server endpoint here
-                // For now, we'll just use localStorage
-                console.log('Counter synced locally');
-            } catch (error) {
-                console.log('Server sync failed, using local storage only');
+                const res = await fetch(`${COUNTER_API}/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    return typeof data.value === 'number' ? data.value : null;
+                }
+            } catch (e) {
+                console.warn('Remote counter increment failed:', e);
+            }
+            return null;
+        }
+
+        function getLocalCount() {
+            return parseInt(localStorage.getItem(LOCAL_KEY)) || 0;
+        }
+
+        function setLocalCount(value) {
+            localStorage.setItem(LOCAL_KEY, String(value));
+        }
+
+        async function loadDownloadCount() {
+            // Try remote first
+            const remote = await getRemoteCount();
+            if (typeof remote === 'number') {
+                setCounterText(remote);
+                setLocalCount(remote); // keep local in sync for offline
+                return;
+            }
+            // fallback to local
+            const local = getLocalCount();
+            setCounterText(local);
+        }
+
+        async function updateDownloadCount() {
+            // Optimistically update local
+            const optimistic = getLocalCount() + 1;
+            setLocalCount(optimistic);
+            setCounterText(optimistic);
+
+            // Update remote
+            const remote = await incrementRemoteCount();
+            if (typeof remote === 'number') {
+                setLocalCount(remote);
+                setCounterText(remote);
             }
         }
 
         // Handle download click
-        document.getElementById('downloadBtn').addEventListener('click', function(e) {
-            console.log('Download button clicked');
-            // Update counter immediately
+        document.getElementById('downloadBtn').addEventListener('click', function() {
             updateDownloadCount();
-            
-            // Add a small delay to show the increment
-            setTimeout(() => {
-                // The download will start automatically due to the download attribute
-            }, 100);
         });
 
         // Load count when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded, loading counter...');
             loadDownloadCount();
         });
     </script>
