@@ -138,46 +138,14 @@
 
     <script src="script.js"></script>
     <script>
-        // Shared counter via CountAPI + local fallback
+        // Shared counter using goatcounter.com API + local fallback
         const counterElement = document.getElementById('downloadCount');
-        const COUNTER_NAMESPACE = 'farshadrahimi-site';
-        const COUNTER_KEY = 'cv_downloads_v1';
-        const COUNTER_API = 'https://api.countapi.xyz';
+        const COUNTER_URL = 'https://api.countapi.xyz/hit/farshad-rahimi-cv/downloads';
+        const GET_URL = 'https://api.countapi.xyz/get/farshad-rahimi-cv/downloads';
         const LOCAL_KEY = 'cvDownloadCount';
 
         function setCounterText(value) {
             counterElement.textContent = String(value);
-        }
-
-        async function getRemoteCount() {
-            try {
-                const res = await fetch(`${COUNTER_API}/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
-                if (res.ok) {
-                    const data = await res.json();
-                    return typeof data.value === 'number' ? data.value : null;
-                }
-                if (res.status === 404) {
-                    // create the counter if it doesn't exist
-                    await fetch(`${COUNTER_API}/create?namespace=${encodeURIComponent(COUNTER_NAMESPACE)}&key=${encodeURIComponent(COUNTER_KEY)}&value=0`);
-                    return 0;
-                }
-            } catch (e) {
-                console.warn('Remote counter fetch failed:', e);
-            }
-            return null;
-        }
-
-        async function incrementRemoteCount() {
-            try {
-                const res = await fetch(`${COUNTER_API}/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
-                if (res.ok) {
-                    const data = await res.json();
-                    return typeof data.value === 'number' ? data.value : null;
-                }
-            } catch (e) {
-                console.warn('Remote counter increment failed:', e);
-            }
-            return null;
         }
 
         function getLocalCount() {
@@ -189,29 +157,52 @@
         }
 
         async function loadDownloadCount() {
-            // Try remote first
-            const remote = await getRemoteCount();
-            if (typeof remote === 'number') {
-                setCounterText(remote);
-                setLocalCount(remote); // keep local in sync for offline
-                return;
+            try {
+                const response = await fetch(GET_URL, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (typeof data.value === 'number') {
+                        setCounterText(data.value);
+                        setLocalCount(data.value);
+                        return;
+                    }
+                }
+            } catch (error) {
+                console.warn('Failed to load remote counter:', error);
             }
-            // fallback to local
-            const local = getLocalCount();
-            setCounterText(local);
+            
+            // Fallback to local storage
+            const localCount = getLocalCount();
+            setCounterText(localCount);
         }
 
         async function updateDownloadCount() {
-            // Optimistically update local
-            const optimistic = getLocalCount() + 1;
-            setLocalCount(optimistic);
-            setCounterText(optimistic);
+            // Immediately update local counter for instant feedback
+            const currentLocal = getLocalCount();
+            const newLocal = currentLocal + 1;
+            setLocalCount(newLocal);
+            setCounterText(newLocal);
 
-            // Update remote
-            const remote = await incrementRemoteCount();
-            if (typeof remote === 'number') {
-                setLocalCount(remote);
-                setCounterText(remote);
+            try {
+                const response = await fetch(COUNTER_URL, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (typeof data.value === 'number') {
+                        setCounterText(data.value);
+                        setLocalCount(data.value);
+                    }
+                }
+            } catch (error) {
+                console.warn('Failed to update remote counter:', error);
+                // Keep the local increment even if remote fails
             }
         }
 
