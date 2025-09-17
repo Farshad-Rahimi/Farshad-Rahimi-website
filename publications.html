@@ -10,6 +10,7 @@
     <style>
         .publication-section {
             margin-bottom: 4rem;
+            scroll-margin-top: 110px;
         }
 
         .section-header {
@@ -146,6 +147,71 @@
         .scholar-link-box i {
             font-size: 1.2rem;
         }
+
+        /* Quick Navigation */
+        .quick-nav {
+            margin-top: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .quick-card {
+            background: white;
+            color: #1f2937;
+            text-decoration: none;
+            border-radius: 12px;
+            padding: 1rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .quick-card i {
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        .icon-review { background: #f59e0b; }
+        .icon-journal { background: #2563eb; }
+        .icon-conference { background: #10b981; }
+        .icon-coauthors { background: #8b5cf6; }
+
+        .quick-card-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* Co-authors */
+        .coauthors-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .coauthor-chip {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 0.5rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #e5e7eb;
+        }
     </style>
 </head>
 <body>
@@ -184,21 +250,32 @@
     <section class="page-header">
         <div class="container">
             <h1 class="page-title">Publications</h1>
-            <p class="page-subtitle">Peer‑reviewed research spanning robotics, fault‑tolerant control, distributed systems, and learning‑based methods.</p>
             
-            <!-- Topic Tags -->
-            <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
-                <span style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.35); padding: 6px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;">Robotics</span>
-                <span style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.35); padding: 6px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;">Fault‑Tolerant Control</span>
-                <span style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.35); padding: 6px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;">Distributed Systems</span>
-                <span style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.35); padding: 6px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;">ADP / RL</span>
-            </div>
-
             <!-- Google Scholar Link Box -->
             <div class="scholar-link-container" style="margin-top: 1.5rem;">
                 <a href="https://scholar.google.com/citations?hl=en&user=KOzMTRsAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" class="scholar-link-box" style="background: #2563eb; box-shadow: 0 4px 15px rgba(37,99,235,0.35);">
                     <i class="fas fa-graduation-cap"></i>
                     View on Google Scholar
+                </a>
+            </div>
+
+            <!-- Quick Navigation Cards -->
+            <div class="quick-nav" aria-label="Quick navigation">
+                <a class="quick-card" href="#under-reviewing" aria-label="Jump to Under Reviewing Papers">
+                    <i class="fas fa-hourglass-half icon-review"></i>
+                    <span class="quick-card-title">Under Reviewing</span>
+                </a>
+                <a class="quick-card" href="#journal-papers" aria-label="Jump to Journal Papers">
+                    <i class="fas fa-book icon-journal"></i>
+                    <span class="quick-card-title">Journal Papers</span>
+                </a>
+                <a class="quick-card" href="#conference-papers" aria-label="Jump to Conference Papers">
+                    <i class="fas fa-podium icon-conference"></i>
+                    <span class="quick-card-title">Conference Papers</span>
+                </a>
+                <a class="quick-card" href="#co-authors" aria-label="Jump to Co-authors">
+                    <i class="fas fa-users icon-coauthors"></i>
+                    <span class="quick-card-title">Co-authors</span>
                 </a>
             </div>
         </div>
@@ -208,7 +285,7 @@
     <section class="publications">
         <div class="container">
             <!-- Under Reviewing Papers -->
-            <div class="publication-section" style="background: #f0f7ff; border-left: 6px solid #2563eb; border-radius: 18px; box-shadow: 0 2px 12px rgba(37,99,235,0.08); padding: 2rem 1.5rem 1.5rem 1.5rem; margin-bottom: 3rem;">
+            <div id="under-reviewing" class="publication-section" style="background: #f0f7ff; border-left: 6px solid #2563eb; border-radius: 18px; box-shadow: 0 2px 12px rgba(37,99,235,0.08); padding: 2rem 1.5rem 1.5rem 1.5rem; margin-bottom: 3rem;">
                 <div class="section-header">
                     <h2 class="section-title" style="color: #2563eb;">Under Reviewing Papers</h2>
                     <p class="section-subtitle" style="color: #2563eb;">Papers currently under review in various journals and conferences</p>
@@ -239,7 +316,7 @@
             </div>
 
             <!-- Journal Papers -->
-            <div class="publication-section">
+            <div id="journal-papers" class="publication-section">
                 <div class="section-header">
                     <h2 class="section-title">Journal Papers</h2>
                     <p class="section-subtitle">Published papers in peer-reviewed journals</p>
@@ -438,7 +515,7 @@
             </div>
 
             <!-- Conference Papers -->
-            <div class="publication-section">
+            <div id="conference-papers" class="publication-section">
                 <div class="section-header">
                     <h2 class="section-title">Conference Papers</h2>
                     <p class="section-subtitle">Papers presented at international conferences and symposiums</p>
@@ -500,6 +577,21 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- Co-authors -->
+            <div id="co-authors" class="publication-section">
+                <div class="section-header">
+                    <h2 class="section-title">Co-authors</h2>
+                    <p class="section-subtitle">Collaborators and co-authors across my publications</p>
+                </div>
+                <div class="coauthors-grid">
+                    <span class="coauthor-chip">H. Rezaei</span>
+                    <span class="coauthor-chip">Sh. Ahmadpour</span>
+                    <span class="coauthor-chip">C. Guillaume</span>
+                    <span class="coauthor-chip">H. Shahi</span>
+                    <span class="coauthor-chip">Reza Mahboobi Esfanjani</span>
+                    <span class="coauthor-chip">Sepideh Ziaei</span>
                 </div>
             </div>
         </div>
