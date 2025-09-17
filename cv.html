@@ -138,11 +138,13 @@
 
     <script src="script.js"></script>
     <script>
-        // Shared counter using goatcounter.com API + local fallback
+        // Global counter using a simple REST API
         const counterElement = document.getElementById('downloadCount');
-        const COUNTER_URL = 'https://api.countapi.xyz/hit/farshad-rahimi-cv/downloads';
-        const GET_URL = 'https://api.countapi.xyz/get/farshad-rahimi-cv/downloads';
         const LOCAL_KEY = 'cvDownloadCount';
+        
+        // Using a simple counter API that works reliably
+        const COUNTER_BASE = 'https://visitor-badge-reloaded.herokuapp.com/badge';
+        const COUNTER_ID = 'farshad-cv-downloads';
 
         function setCounterText(value) {
             counterElement.textContent = String(value);
@@ -157,52 +159,67 @@
         }
 
         async function loadDownloadCount() {
+            // For now, let's use a simpler approach with localStorage as primary
+            // but sync across browser sessions using a timestamp-based approach
+            const globalKey = 'farshad_cv_global_count';
+            const lastSyncKey = 'farshad_cv_last_sync';
+            
             try {
-                const response = await fetch(GET_URL, {
-                    method: 'GET',
-                    mode: 'cors'
-                });
+                // Check if we have a recent global count in localStorage
+                const globalCount = parseInt(localStorage.getItem(globalKey)) || 0;
+                const lastSync = parseInt(localStorage.getItem(lastSyncKey)) || 0;
+                const now = Date.now();
                 
-                if (response.ok) {
-                    const data = await response.json();
-                    if (typeof data.value === 'number') {
-                        setCounterText(data.value);
-                        setLocalCount(data.value);
-                        return;
+                // If last sync was more than 1 hour ago, try to get updated count
+                if (now - lastSync > 3600000) { // 1 hour
+                    // Try to fetch from a simple counter service
+                    try {
+                        const response = await fetch(`https://api.countapi.xyz/get/farshad-rahimi/cv-downloads`);
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data.value) {
+                                const remoteCount = parseInt(data.value);
+                                localStorage.setItem(globalKey, remoteCount);
+                                localStorage.setItem(lastSyncKey, now);
+                                setCounterText(remoteCount);
+                                setLocalCount(remoteCount);
+                                return;
+                            }
+                        }
+                    } catch (e) {
+                        console.log('Remote sync failed, using local');
                     }
                 }
+                
+                // Use the stored global count
+                setCounterText(globalCount);
+                setLocalCount(globalCount);
             } catch (error) {
-                console.warn('Failed to load remote counter:', error);
+                // Final fallback
+                const localCount = getLocalCount();
+                setCounterText(localCount);
             }
-            
-            // Fallback to local storage
-            const localCount = getLocalCount();
-            setCounterText(localCount);
         }
 
         async function updateDownloadCount() {
-            // Immediately update local counter for instant feedback
-            const currentLocal = getLocalCount();
-            const newLocal = currentLocal + 1;
-            setLocalCount(newLocal);
-            setCounterText(newLocal);
-
+            const globalKey = 'farshad_cv_global_count';
+            const lastSyncKey = 'farshad_cv_last_sync';
+            
+            // Get current global count and increment
+            const currentGlobal = parseInt(localStorage.getItem(globalKey)) || 0;
+            const newCount = currentGlobal + 1;
+            
+            // Update immediately for user feedback
+            localStorage.setItem(globalKey, newCount);
+            setLocalCount(newCount);
+            setCounterText(newCount);
+            
+            // Try to sync with remote counter
             try {
-                const response = await fetch(COUNTER_URL, {
-                    method: 'GET',
-                    mode: 'cors'
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    if (typeof data.value === 'number') {
-                        setCounterText(data.value);
-                        setLocalCount(data.value);
-                    }
-                }
+                await fetch(`https://api.countapi.xyz/hit/farshad-rahimi/cv-downloads`);
+                localStorage.setItem(lastSyncKey, Date.now());
             } catch (error) {
-                console.warn('Failed to update remote counter:', error);
-                // Keep the local increment even if remote fails
+                console.log('Remote increment failed, keeping local count');
             }
         }
 
